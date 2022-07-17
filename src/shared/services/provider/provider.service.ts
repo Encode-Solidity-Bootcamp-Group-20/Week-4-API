@@ -37,5 +37,6 @@ export class ProviderService {
   async getBalance(address: string) {
     const balanceBN = await this.provider.getBalance(address);
     const balance = ethers.utils.formatEther(balanceBN);
+    return balance;
   }
 }

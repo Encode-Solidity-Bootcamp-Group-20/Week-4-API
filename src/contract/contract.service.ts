@@ -5,7 +5,8 @@ import { ProviderService } from './../shared/services/provider/provider.service'
 export class ContractService {
   constructor(private providerService: ProviderService) {}
 
-  getNFTMetadataById() {
-    return 'Get NFT metadata';
+  async getNFTMetadataById(id: number) {
+    const url =
+      'https://ipfs.io/ipfs/QmP5QyW4phUmDEwRh5CwSQTfM3ZrX1TTBmXErmtK3t2mfQ?filename=metadata.json';
   }
 }
