@@ -47,10 +47,7 @@ export class ContractService {
   }
 
   async mintTokens(address: string, amount: number) {
-    const tx = await this.contractSignedInstance.mint(
-      address,
-      ethers.utils.parseEther(amount.toFixed(18)),
-    );
+    const tx = await this.contractSignedInstance.mint(address, amount);
     return tx;
   }
 }
