@@ -2,6 +2,7 @@ import { Controller, Get, HttpException, Param, Post, Provider } from '@nestjs/c
 import { ContractService } from './contract.service';
 import { ProviderService } from './../shared/services/provider/provider.service';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { resourceLimits } from 'worker_threads';
 
 
 @Controller('contract')
@@ -42,6 +43,16 @@ export default class ContractController {
   })
   async getWalletBalanceByAddress(@Param('address') address: string) {
     const result = await this.providerService.getBalance(address);
+    return result;
+  }
+
+  @Get('balance/:address')
+  @ApiOperation({
+    summary: 'Get address token balance',
+    description: "Get the specified address' balance of this contract's tokens",
+  })
+  async tokenBalanceOf(@Param('address') address: string) {
+    const result = await this.contractService.tokenBalanceOf(address);
     return result;
   }
 

@@ -3,7 +3,6 @@ import { ProviderService } from './../shared/services/provider/provider.service'
 import { ethers } from 'ethers';
 import { SignerService } from './../shared/services/signer/signer.service';
 import * as TokenContract from '../../abi.json';
-import { ExpressAdapter } from '@nestjs/platform-express';
 import { HttpService } from '@nestjs/axios';
 
 @Injectable()
@@ -47,7 +46,12 @@ export class ContractService {
   }
 
   async mintTokens() {
-    const tx = await this.contractSignedInstance.MintNft();
+    const tx = await this.contractSignedInstance.MintNFT();
     return tx;
+  }
+
+  async tokenBalanceOf(address: string) {
+    const balance = await this.contractPublicInstance.balanceOf(address);
+    return balance;
   }
 }
