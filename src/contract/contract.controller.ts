@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, Param, Provider } from '@nestjs/common';
+import { Controller, Get, HttpException, Param, Post, Provider } from '@nestjs/common';
 import { ContractService } from './contract.service';
 import { ProviderService } from './../shared/services/provider/provider.service';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -27,7 +27,7 @@ export default class ContractController {
   async getMetadataById(@Param('id') id: number) {
     let result;
     try {
-      const result = await this.contractService.getNFTMetadataById(id);
+      result = await this.contractService.getNFTMetadataById(id);
     } catch (error) {
       throw new HttpException(error.message, 503);
     }
@@ -43,5 +43,18 @@ export default class ContractController {
   async getWalletBalanceByAddress(@Param('address') address: string) {
     const result = await this.providerService.getBalance(address);
     return result;
+  }
+
+  @Post('wallet/mint/:address/:amount')
+  @ApiOperation({
+    summary: 'Mint NFT(s) to address',
+    description:
+      'Mints NFTs from the contract to specified address (@param1), in specified quantity (@param2)',
+  })
+  async mintNftToAddress(
+    @Param('address') address: string,
+    @Param('amount') amount: number,
+  ) {
+    return await this.contractService.mintTokens(address, amount);
   }
 }
