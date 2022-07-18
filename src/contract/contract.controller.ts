@@ -1,9 +1,7 @@
-import { Controller, Get, HttpException, Param, Post, Provider } from '@nestjs/common';
+import { Controller, Get, HttpException, Param, Post } from '@nestjs/common';
 import { ContractService } from './contract.service';
 import { ProviderService } from './../shared/services/provider/provider.service';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { resourceLimits } from 'worker_threads';
-
 
 @Controller('contract')
 export default class ContractController {

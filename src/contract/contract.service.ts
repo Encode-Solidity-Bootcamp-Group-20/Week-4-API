@@ -10,8 +10,6 @@ export class ContractService {
   contractPublicInstance: ethers.Contract;
   contractSignedInstance: ethers.Contract;
 
-  
-
   constructor(
     private providerService: ProviderService,
     private signerService: SignerService,
@@ -38,8 +36,7 @@ export class ContractService {
   async getNFTMetadataById(id: number) {
     const url =
       'https://ipfs.io/ipfs/QmP5QyW4phUmDEwRh5CwSQTfM3ZrX1TTBmXErmtK3t2mfQ?filename=metadata.json';
-      const url2 = 'ipfs://QmP5QyW4phUmDEwRh5CwSQTfM3ZrX1TTBmXErmtK3t2mfQ';
-    //How do I query this in node?
+
     return this.httpService.get(url);
     // const metadata = this.httpService.get(url);
     // return metadata[id];
@@ -52,6 +49,7 @@ export class ContractService {
 
   async tokenBalanceOf(address: string) {
     const balance = await this.contractPublicInstance.balanceOf(address);
-    return balance;
+    console.log(`${balance}`);
+    return parseInt(balance);
   }
 }
