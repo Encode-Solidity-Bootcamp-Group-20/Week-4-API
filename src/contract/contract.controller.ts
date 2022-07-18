@@ -45,16 +45,13 @@ export default class ContractController {
     return result;
   }
 
-  @Post('wallet/mint/:address/:amount')
+  @Post('wallet/mint/')
   @ApiOperation({
-    summary: 'Mint NFT(s) to address',
-    description:
-      'Mints NFTs from the contract to specified address (@param1), in specified quantity (@param2)',
+    summary: 'Mint NFTto msg.sender',
+    description: 'Mints an NFT from the contract',
   })
-  async mintNftToAddress(
-    @Param('address') address: string,
-    @Param('amount') amount: number,
-  ) {
-    return await this.contractService.mintTokens(address, amount);
+  async mintNftToAddress() {
+    const tx = await this.contractService.mintTokens();
+    return tx;
   }
 }

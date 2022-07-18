@@ -46,8 +46,8 @@ export class ContractService {
     // return metadata[id];
   }
 
-  async mintTokens(address: string, amount: number) {
-    const tx = await this.contractSignedInstance.mint(address, amount);
+  async mintTokens() {
+    const tx = await this.contractSignedInstance.MintNft();
     return tx;
   }
 }
